@@ -11,3 +11,7 @@ Users need to create a `config.py` manually, with contents below:
 	USER_PASSWORD = '<student password>'
 
 Replace everything in angle brackets with your own values.
+
+After the script finishes, the exam paper is not submitted automatically.
+
+You can either submit it manually, or wait for it to expire.

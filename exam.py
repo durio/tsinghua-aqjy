@@ -56,13 +56,17 @@ for library_id in LIBRARY_IDS:
     scrap_library_page(br.response().read().decode('gb18030', 'replace'))
 
 # Answer
-print 'Loading exam 1/3'
+print 'Loading exam 1/4'
 br.open('http://aqjy.tsinghua.edu.cn/exam/studentexame/studentExameAction!getExame.do')
-print 'Loading exam 2/3'
+print 'Loading exam 2/4'
 br.open('http://aqjy.tsinghua.edu.cn/exam/studentexame/studentExameAction!beforeGotoExame.do?exameid=' + EXAM_ID)
+print 'Loading exam 3/4'
+# In some exams, there is a "foreword" page here. Let's be bold and go one step further.
+# With some tests, it appears there's no harm in exams without such a page.
+br.open('http://aqjy.tsinghua.edu.cn/exam/studentexame/studentExameAction!gotoExame.do?exameid=' + EXAM_ID)
 questions = max(map(int, re.findall(ur'javascript:formsubmit\(\'(\d+)\'\)', br.response().read().decode('gb18030', 'replace'))))
 
-print 'Loading exam 3/3'
+print 'Loading exam 4/4'
 br.select_form('exameform')
 br.set_all_readonly(False)
 br['pageNum'] = '1'

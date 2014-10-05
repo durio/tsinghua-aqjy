@@ -9,6 +9,7 @@ import re
 br = mechanize.Browser()
 library = {}
 
+PASSWORD_RE = re.compile(ur'document\.getElementById\("password"\)\.value = \'(.*?:null)\';')
 LIBRARY_RE = re.compile(ur'<tr style="border: 0;">\s*<td style="border: 0;">\s*(\d+)&nbsp;&nbsp;\s*(单选题|多选题|判断题)\s*</td>\s*'
         + ur'<td style="border: 0;"><a title="查看详细" href="/exam/studenttest/studentTestAction!gotoSearchThemeOneDetail\.do\?themeid=(\d+)" target="_blank">(.*?)</a></td>\s*</tr>'
         + ur'.*?<tr>\s*<td colspan="3"><a id="da_\d+" class="da" href="javascript: getDaan\(\'da_\d+\'\);">正确答案：</a>\s*'
@@ -42,7 +43,7 @@ print 'Logging in 2/2'
 br.select_form(nr=0)
 br.set_all_readonly(False)
 br['j_username'] = USER_ID
-br['j_password'] = 'ticket:null'
+br['j_password'] = PASSWORD_RE.search(br.response().read().decode('gb18030', 'replace')).group(1)
 br.submit()
 
 # Load library

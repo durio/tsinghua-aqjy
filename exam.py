@@ -14,7 +14,7 @@ LIBRARY_RE = re.compile(ur'<tr style="border: 0;">\s*<td style="border: 0;">\s*(
         + ur'<td style="border: 0;"><a title="查看详细" href="/exam/studenttest/studentTestAction!gotoSearchThemeOneDetail\.do\?themeid=(\d+)" target="_blank">(.*?)</a></td>\s*</tr>'
         + ur'.*?<tr>\s*<td colspan="3"><a id="da_\d+" class="da" href="javascript: getDaan\(\'da_\d+\'\);">正确答案：</a>\s*'
         + ur'<font id="an_\d+" class="an" color="red" style="display: none;">\s*(\S+)\s*</font>\s*</td>\s*</tr>', re.DOTALL)
-QUESTION_RE = re.compile(ur'题干： (.*?)\(分数：\d+分\)', re.DOTALL)
+QUESTION_RE = re.compile(ur'题干： (.*?)\(分数：[\d\.]+分\)', re.DOTALL)
 
 def scrap_library_page(page):
     count = 0
